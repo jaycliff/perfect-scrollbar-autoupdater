@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Perfect Scrollbar AutoUpdater</title>
+        <style type="text/css">
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            
+            #box {
+                border: solid 1px #c0c0c0;
+                height: 240px;
+                margin: 20px auto;
+                position: relative;
+                width: 320px;
+            }
+            
+            body .ps-container > .ps-scrollbar-y-rail {
+                width: 16px;
+            }
+            
+            body .ps-container:hover > .ps-scrollbar-y-rail:hover {
+                background-color: transparent;
+            }
+            
+            body .ps-container.ps-in-scrolling.ps-y > .ps-scrollbar-y-rail {
+                background-color: transparent;
+                opacity: 1;
+            }
+            
+            body .ps-container > .ps-scrollbar-y-rail > .ps-scrollbar-y {
+                width: 8px;
+                right: 4px;
+            }
+            
+            body .ps-container > .ps-scrollbar-y-rail:hover > .ps-scrollbar-y,
+            body .ps-container > .ps-scrollbar-y-rail:active > .ps-scrollbar-y {
+                width: 8px;
+            }
+        </style>
+        <link rel="stylesheet" href="css/perfect-scrollbar.css" type="text/css" />
+        <!-- <link rel="stylesheet" href="bs-es.css" type="text/css" /> -->
+        <!-- <script type="text/javascript" src="jquery-1.11.3.min.js"></script> -->
+        <script type="text/javascript" src="js/jquery-3.0.0.min.js"></script>
+        <script type="text/javascript" src="js/perfect-scrollbar.jquery.min.js"></script>
+        <script type="text/javascript" src="js/perfect-scrollbar-autoupdater.jquery.js"></script>
+        <script type="text/javascript">
+            (function ($) {
+                "use strict";
+                $(document).ready(function () {
+                    $('#box').perfectScrollbar();
+                });
+            }(typeof jQuery === "function" && jQuery));
+        </script>
+    </head>
+    <body>
+        <!-- Template by Jaycliff Arcilla -->
+        <div id="box">
+            Kugmo<br />
+            nimo<br />
+            uga<br />
+            pero<br />
+            pilit<br />
+            LOL<br />
+            Kugmo<br />
+            nimo<br />
+            uga<br />
+            pero<br />
+            pilit<br />
+            LOL<br />
+            Kugmo<br />
+            nimo<br />
+            uga<br />
+            pero<br />
+            pilit<br />
+            LOL<br />
+        </div>
+    </body>
+</html>
