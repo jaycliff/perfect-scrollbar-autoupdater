@@ -17,6 +17,8 @@ if (typeof jQuery.fn.perfectScrollbar === "function") {
     jQuery.fn.perfectScrollbar = (function (originalPSB) {
         "use strict";
         var dummy = {}, list_of_instances = [], list_of_state = [], index, raf_id;
+        window.list_of_instances = list_of_instances;
+        window.list_of_state = list_of_state;
         function rafCallback() {
             var k, len, instance, state, curr_width, curr_height;
             for (k = 0, len = list_of_instances.length; k < len; k += 1) {
@@ -26,6 +28,7 @@ if (typeof jQuery.fn.perfectScrollbar === "function") {
                     curr_width = instance.width();
                     curr_height = instance.height();
                     if (state.width !== curr_width || state.height !== curr_height) {
+                        console.log(instance[0]);
                         instance.perfectScrollbar('update');
                         state.width = curr_width;
                         state.height = curr_height;
@@ -35,21 +38,28 @@ if (typeof jQuery.fn.perfectScrollbar === "function") {
             raf_id = requestAnimationFrame(rafCallback);
         }
         rafCallback();
+        function eachDestructionHandler() {
+            list_of_instances[$.data(this, 'psb-autoupdater-index')] = dummy;
+        }
+        function eachCreationHandler() {
+            var $this = $(this);
+            index = list_of_instances.length;
+            $.data(this, 'psb-autoupdater-index', index);
+            list_of_instances.push($this);
+            list_of_state.push({
+                height: $this.height(),
+                width: $this.width()
+            });
+        }
         return function perfectScrollbar(param) {
             switch (typeof param) {
             case 'string':
                 if (param === 'destroy') {
-                    list_of_instances[$.data(this[0], 'psb-autoupdater-index')] = dummy;
+                    this.each(eachDestructionHandler);
                 }
                 break;
             default:
-                index = list_of_instances.length;
-                $.data(this[0], 'psb-autoupdater-index', index);
-                list_of_instances.push(this);
-                list_of_state.push({
-                    width: this.width(),
-                    height: this.height()
-                });
+                this.each(eachCreationHandler);
             }
             originalPSB.call(this, param);
             return this;
