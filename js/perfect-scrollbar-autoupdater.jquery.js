@@ -13,8 +13,9 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 */
+/*global jQuery*/
 if (typeof jQuery.fn.perfectScrollbar === "function") {
-    jQuery.fn.perfectScrollbar = (function (originalPSB) {
+    jQuery.fn.perfectScrollbar = (function (originalPSB, $) {
         "use strict";
         var dummy = {}, list_of_instances = [], list_of_state = [], index, raf_id;
         window.list_of_instances = list_of_instances;
@@ -39,9 +40,11 @@ if (typeof jQuery.fn.perfectScrollbar === "function") {
         }
         rafCallback();
         function eachDestructionHandler() {
+            /* jshint validthis: true */
             list_of_instances[$.data(this, 'psb-autoupdater-index')] = dummy;
         }
         function eachCreationHandler() {
+            /* jshint validthis: true */
             var $this = $(this);
             index = list_of_instances.length;
             $.data(this, 'psb-autoupdater-index', index);
@@ -64,5 +67,5 @@ if (typeof jQuery.fn.perfectScrollbar === "function") {
             originalPSB.call(this, param);
             return this;
         };
-    }(jQuery.fn.perfectScrollbar));
+    }(jQuery.fn.perfectScrollbar, jQuery));
 }
