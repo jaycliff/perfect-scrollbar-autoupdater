@@ -17,7 +17,7 @@
 if (typeof jQuery.fn.perfectScrollbar === "function") {
     jQuery.fn.perfectScrollbar = (function (originalPSB, $) {
         "use strict";
-        var dummy = {}, list_of_instances = [], list_of_state = [], index, raf_id;
+        var dummy = $(document), list_of_instances = [], list_of_state = [], index, raf_id;
         window.list_of_instances = list_of_instances;
         window.list_of_state = list_of_state;
         function rafCallback() {
